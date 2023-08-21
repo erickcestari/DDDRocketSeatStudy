@@ -35,7 +35,7 @@ export class Question extends Entity<QuestionProps> {
   }
 
   get slug(): string {
-    return this.props.slug
+    return this.props.slug.value
   }
 
   get authorId(): string {
