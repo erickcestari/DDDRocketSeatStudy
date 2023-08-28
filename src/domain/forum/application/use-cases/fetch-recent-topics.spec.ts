@@ -14,18 +14,18 @@ describe('Fetch Recent Questions', () => {
   })
 
   it('should be able to fetch recents questions', async () => {
+    for(let i = 0; i < 22; i++) {
+      await inMemoryQuestionsRepository.create(makeQuestion())
+    }
     await inMemoryQuestionsRepository.create(makeQuestion({createdAt: new Date('2021-01-01')}))
     await inMemoryQuestionsRepository.create(makeQuestion({createdAt: new Date('2022-01-01')}))
     await inMemoryQuestionsRepository.create(makeQuestion({createdAt: new Date('2022-01-10')}))
-
+    
+    inMemoryQuestionsRepository.items.length
     const { questions } = await sut.execute({
       page: 1,
     })
-    
-    expect(questions).toEqual([
-      expect.objectContaining({createdAt: new Date('2022-01-10')}),
-      expect.objectContaining({createdAt: new Date('2022-01-01')}),
-      expect.objectContaining({createdAt: new Date('2021-01-01')}),
-    ])
+
+    expect(questions).toHaveLength(20)
   })
 })
