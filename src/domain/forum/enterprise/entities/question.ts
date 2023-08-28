@@ -51,7 +51,7 @@ export class Question extends Entity<QuestionProps> {
     this.touch()
   }
 
-  get createdAt(): string {
+  get createdAt(): Date {
     return this.props.createdAt
   }
 
@@ -79,7 +79,7 @@ export class Question extends Entity<QuestionProps> {
       {
         ...props,
         slug: props.slug ?? Slug.createFromText(props.title),
-        createdAt: new Date(),
+        createdAt: props.createdAt ?? new Date(),
       },
       id,
     )
