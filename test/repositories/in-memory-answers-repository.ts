@@ -22,7 +22,6 @@ export class InMemoryAnswersRepository implements AnswersRepository {
     .slice(((page - 1) * 20), page * 20)
 
     return answers
-
   }
 
   async create(answer: Answer) {

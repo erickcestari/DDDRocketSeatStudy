@@ -1,8 +1,7 @@
-import { makeQuestion } from 'test/factories/make-question'
+import { UniqueEntityId } from '@/core/entities/unique-entity-id'
+import { makeAnswer } from 'test/factories/make-answer'
 import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository'
 import { FetchQuestionAnswersUseCase } from './fetch-question-answers'
-import { makeAnswer } from 'test/factories/make-answer'
-import { UniqueEntityId } from '@/core/entities/unique-entity-id'
 
 let inMemoryAnswersRepository: InMemoryAnswersRepository
 let sut: FetchQuestionAnswersUseCase
