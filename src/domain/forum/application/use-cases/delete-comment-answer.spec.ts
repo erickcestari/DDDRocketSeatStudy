@@ -1,44 +1,44 @@
+import { InMemoryAnswerCommentsRepository } from 'test/repositories/in-memory-answer-comments-repository'
+import { DeleteAnswerCommentUseCase } from './delete-comment-answer'
 import { UniqueEntityId } from '@/core/entities/unique-entity-id'
-import { makeQuestion } from 'test/factories/make-question'
-import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions-repository'
-import { DeleteQuestionUseCase } from './delete-question'
+import { makeAnswerComment } from 'test/factories/make-answer-comment'
 
-let inMemoryQuestionsRepository: InMemoryQuestionsRepository
-let sut: DeleteQuestionUseCase
+let inMemoryAnswerCommentsRepository: InMemoryAnswerCommentsRepository
+let sut: DeleteAnswerCommentUseCase
 
-describe('Delete Question', () => {
+describe('Delete Answer Comment', () => {
   beforeEach(() => {
-    inMemoryQuestionsRepository = new InMemoryQuestionsRepository()
-    sut = new DeleteQuestionUseCase(inMemoryQuestionsRepository)
+    inMemoryAnswerCommentsRepository = new InMemoryAnswerCommentsRepository()
+    sut = new DeleteAnswerCommentUseCase(inMemoryAnswerCommentsRepository)
   })
 
-  it('should be able to delete a question', async () => {
+  it('should be able to delte a answer comment', async () => {
 
-    const newQuestion = makeQuestion({authorId: new UniqueEntityId('author-1')}, new UniqueEntityId('question-1'))
+    const answerComment = makeAnswerComment()
 
-    await inMemoryQuestionsRepository.create(newQuestion)
+    await inMemoryAnswerCommentsRepository.create(answerComment)
 
     await sut.execute({
-      questionId: 'question-1',
-      authorId: 'author-1',
+      answerCommentId: answerComment.id.toString(),
+      authorId: answerComment.authorId.toString(),
     })
 
-    expect(inMemoryQuestionsRepository.items).toHaveLength(0)
+    expect(inMemoryAnswerCommentsRepository.items).toHaveLength(0)
   })
 
-  it('should not be able to delete a question', async () => {
+  it('should not to be able to delte a answer comment', async () => {
 
-    const newQuestion = makeQuestion({authorId: new UniqueEntityId('author-1')}, new UniqueEntityId('question-1'))
+    const answerComment = makeAnswerComment({
+      authorId: new UniqueEntityId('author-123')
+    })
 
-    await inMemoryQuestionsRepository.create(newQuestion)
+    await inMemoryAnswerCommentsRepository.create(answerComment)
+    expect(() => {
+      return sut.execute({
+        answerCommentId: answerComment.id.toString(),
+        authorId: 'author-1',
+      })
+    }).rejects.toBeInstanceOf(Error)
 
-    expect(() => {return sut.execute({
-      questionId: 'question-1',
-      authorId: 'author-123',
-    })}).rejects.toBeInstanceOf(Error)
-
-    expect(inMemoryQuestionsRepository.items).toHaveLength(1)
   })
-
-  
 })

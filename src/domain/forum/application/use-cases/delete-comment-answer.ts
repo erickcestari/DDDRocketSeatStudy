@@ -1,33 +1,37 @@
 import { AnswerCommentsRepository } from "../repositories/answer-comments-repository"
 
-interface DeleteUseCaseRequest {
+interface DeleteAnswerCommentUseCaseRequest {
   authorId: string
-  questionCommentId: string
+  answerCommentId: string
 }
 
-interface DeleteUseCaseResponse {
+interface DeleteAnswerCommentUseCaseResponse {
 
 }
 
-export class DeleteQuestionUseCase {
-  constructor(private answerCommentRepository: AnswerCommentsRepository) {}
+export class DeleteAnswerCommentUseCase {
+  constructor(
+    private answerCommentsRepository: AnswerCommentsRepository
+    ) {}
 
   async execute({
-    questionCommentId,
-    authorId
-  }: DeleteUseCaseRequest): Promise<DeleteUseCaseResponse> {
-    const question = await this.answerCommentRepository.findById(questionCommentId)
+    authorId,
+   answerCommentId,
+  }: DeleteAnswerCommentUseCaseRequest): Promise<DeleteAnswerCommentUseCaseResponse> {
+    const answerComment = await this.answerCommentsRepository.findById(answerCommentId)
 
-    if (!question) {
-      throw new Error('Question not found')
+    if (!answerComment) {
+      throw new Error('AnswerComment not found')
+    }
+  
+    if(answerComment.authorId.toString() != authorId) {
+      throw new Error('You are not the author of this question comment')
     }
 
-    if(authorId != question.authorId.toString()) {
-      throw new Error('You are not the author of this question')
-    }
+    await this.answerCommentsRepository.delete(answerComment)
 
-    await this.answerCommentRepository.delete(question)
-    
-    return {}
+    return {
+     answerComment,
+    }
   }
 }
