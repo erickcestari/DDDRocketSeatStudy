@@ -1,7 +1,7 @@
-import dayjs from 'dayjs'
-import { Entity } from '@/core/entities/entity'
+import { AggregateRoot } from '@/core/entities/agregate-roo'
 import { UniqueEntityId } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
+import dayjs from 'dayjs'
 import { Slug } from './value-objects/slug'
 
 export interface QuestionProps {
@@ -14,7 +14,7 @@ export interface QuestionProps {
   updateAt?: Date
 }
 
-export class Question extends Entity<QuestionProps> {
+export class Question extends AggregateRoot<QuestionProps> {
   get title(): string {
     return this.props.title
   }
