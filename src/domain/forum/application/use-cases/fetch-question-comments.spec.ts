@@ -22,11 +22,11 @@ describe('Fetch Question Comment', () => {
     }
     
     inMemoryQuestionCommentsRepository.items.length
-    const { questionComments } = await sut.execute({
+    const result = await sut.execute({
       page: 1,
       questionId: 'question-1'
     })
 
-    expect(questionComments).toHaveLength(20)
+    expect(result.value?.questionComments).toHaveLength(20)
   })
 })

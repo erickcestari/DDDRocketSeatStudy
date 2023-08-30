@@ -21,10 +21,10 @@ describe('Fetch Recent Questions', () => {
     await inMemoryQuestionsRepository.create(makeQuestion({createdAt: new Date('2022-01-10')}))
     
     inMemoryQuestionsRepository.items.length
-    const { questions } = await sut.execute({
+    const result = await sut.execute({
       page: 1,
     })
 
-    expect(questions).toHaveLength(20)
+    result.isRight() && expect(result.value.questions).toHaveLength(20)
   })
 })

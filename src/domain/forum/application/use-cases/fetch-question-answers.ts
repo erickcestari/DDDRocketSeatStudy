@@ -3,30 +3,29 @@ import { Question } from '../../enterprise/entities/question'
 import { QuestionsRepository } from '../repositories/questions-repository'
 import { AnswersRepository } from '../repositories/answers-repository'
 import { Answer } from '../../enterprise/entities/answer'
+import { Either, left, right } from '@/core/either'
+import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 interface FetchQuestionAnswersUseCaseRequest {
   questionId: string
   page: number
 }
 
-interface FetchQuestionAnswersUseCaseResponse {
-  answers: Answer[]
-}
+type FetchAnswerCommentsUseCaseResponse = Either<ResourceNotFoundError, {answers: Answer[]}>
 
 export class FetchQuestionAnswersUseCase {
   constructor(private asnwersRepository: AnswersRepository) {}
 
-  
   async execute({
     questionId,
     page,
-  }: FetchQuestionAnswersUseCaseRequest): Promise<FetchQuestionAnswersUseCaseResponse> {
+  }: FetchQuestionAnswersUseCaseRequest): Promise<FetchAnswerCommentsUseCaseResponse> {
     const answers = await this.asnwersRepository.findManyByQuestionId(questionId, {page})
 
     if(!answers) {
-      throw new Error('Question not found')
+      return left(new ResourceNotFoundError())
     }
 
-    return {answers}
+    return right({answers})
   }
 }

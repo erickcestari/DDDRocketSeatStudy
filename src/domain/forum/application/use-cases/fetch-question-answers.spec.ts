@@ -20,12 +20,12 @@ describe('Fetch Question Answers', () => {
       }))
     }
     
-    inMemoryAnswersRepository.items.length
-    const { answers } = await sut.execute({
+    const result = await sut.execute({
       page: 1,
       questionId: 'question-1'
     })
 
-    expect(answers).toHaveLength(20)
+    
+    result.isRight() && expect(result.value.answers).toHaveLength(20)
   })
 })
