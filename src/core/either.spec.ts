@@ -10,10 +10,6 @@ function doSometing(x: boolean): Either<string, number> {
 test('success result', () => {
   const sucessResult = doSometing(true)
 
-  if(sucessResult.isRight()) {
-    console.log(sucessResult.value)
-  }
-
   expect(sucessResult.isRight()).toBe(true)
   expect(sucessResult.isLeft()).toBe(false)
 })

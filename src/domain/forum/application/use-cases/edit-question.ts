@@ -18,7 +18,7 @@ interface EditUseCaseRequest {
 type EditUseCaseResponse = Either<NotAllowedError | ResourceNotFoundError, {}>
 
 export class EditQuestionUseCase {
-  constructor(private questionsRepository: QuestionsRepository, private questionAtachmentsRepository: QuestionAttachmentsRepository) {}
+  constructor(private questionsRepository: QuestionsRepository, private questionAttachmentsRepository: QuestionAttachmentsRepository) {}
 
   async execute({
     authorId,
@@ -37,7 +37,7 @@ export class EditQuestionUseCase {
       return left(new NotAllowedError())
     }
 
-    const currentQuestionAttachments = await this.questionAtachmentsRepository.findManyByQuestionId(questionId)
+    const currentQuestionAttachments = await this.questionAttachmentsRepository.findManyByQuestionId(questionId)
     const questionAttachmentList = new QuestionAttachmentList(currentQuestionAttachments)
 
     const questionAttachments = attachmentsIds.map(attachmentId => QuestionAttachment.create({
