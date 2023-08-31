@@ -3,8 +3,8 @@ import { UniqueEntityId } from '@/core/entities/unique-entity-id'
 import { Question } from '../../enterprise/entities/question'
 import { AnswersRepository } from '../repositories/answers-repository'
 import { QuestionsRepository } from '../repositories/questions-repository'
-import { NotAllowedError } from './errors/not-allowed-error'
-import { ResourceNotFoundError } from './errors/resource-not-found-error'
+import { NotAllowedError } from '../../../../core/errors/errors/not-allowed-error'
+import { ResourceNotFoundError } from '../../../../core/errors/errors/resource-not-found-error'
 
 interface ChooseQuestionBestAnswerUseCaseRequest {
   authorId: string

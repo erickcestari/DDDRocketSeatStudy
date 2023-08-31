@@ -26,6 +26,8 @@ export class SendNotificationUseCase {
       content,
     })
 
+    await this.notificationsRepository.create(notification)
+
     return right({notification})
   }
 }
