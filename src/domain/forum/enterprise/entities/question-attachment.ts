@@ -11,7 +11,7 @@ export class QuestionAttachment extends Entity<QuestionAttachmentProps> {
     return this.props.questionId
   }
 
-  get attachmentId(): string {
+  get attachmentId(): UniqueEntityId {
     return this.props.attachmentId
   }
 
