@@ -28,8 +28,6 @@ export class InMemoryQuestionCommentsRepository implements QuestionCommentsRepos
 
   }
 
-  
-
   async delete(questionComment: QuestionComment): Promise<void> {
     const itemIndex = this.items.findIndex(item => item.id == questionComment.id)
 
