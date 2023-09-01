@@ -5,7 +5,7 @@ import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-r
 import { DeleteAnswerUseCase } from './delete-answer'
 import { NotAllowedError } from '../../../../core/errors/errors/not-allowed-error'
 import { makeQuestionAttachment } from 'test/factories/make-question-attachment'
-import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory-answer=attachments-repository'
+import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory-answer-attachments-repository'
 import { makeAnswerAttachment } from 'test/factories/make-answer-attachment'
 
 let inMemoryAnswersRepository: InMemoryAnswersRepository

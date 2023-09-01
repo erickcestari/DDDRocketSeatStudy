@@ -43,8 +43,8 @@ export class InMemoryAnswersRepository implements AnswersRepository {
 
   async save(answer: Answer): Promise<void> {
     const itemIndex = this.items.findIndex(item => item.id == answer.id)
-    
-    DomainEvents.dispatchEventsForAggregate(answer.id)
+
     this.items[itemIndex] = answer
+    DomainEvents.dispatchEventsForAggregate(answer.id)
   } 
 }

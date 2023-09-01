@@ -1,3 +1,4 @@
+import { AggregateRoot } from '@/core/entities/agregate-root'
 import { Entity } from '@/core/entities/entity'
 import { UniqueEntityId } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
@@ -9,7 +10,7 @@ export interface CommentProps {
   updateAt?: Date
 }
 
-export abstract class Comment<Props extends CommentProps> extends Entity<Props> {
+export abstract class Comment<Props extends CommentProps> extends AggregateRoot<Props> {
   get content(): string {
     return this.props.content
   }

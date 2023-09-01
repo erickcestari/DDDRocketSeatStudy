@@ -4,7 +4,6 @@ import { AnswerAttachment } from "@/domain/forum/enterprise/entities/answer-atta
 export class InMemoryAnswerAttachmentsRepository implements AnswerAttachmentsRepository {  
   public items: AnswerAttachment[] = []
 
-
   async findManyByAnswerId(answerId: string ): Promise<AnswerAttachment[]> {
     const answerAttachments = this.items.
     filter(answer => answer.answerId.toString() == answerId)

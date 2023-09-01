@@ -4,7 +4,7 @@ import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-r
 import { EditAnswerUseCase } from './edit-answer'
 import { NotAllowedError } from '../../../../core/errors/errors/not-allowed-error'
 import { makeAnswerAttachment } from 'test/factories/make-answer-attachment'
-import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory-answer=attachments-repository'
+import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory-answer-attachments-repository'
 
 let inMemoryAnswersRepository: InMemoryAnswersRepository
 let inMemoryAnswerAttachmentsRepository: InMemoryAnswerAttachmentsRepository
