@@ -1,15 +1,13 @@
 import { SendNotificationUseCase, SendNotificationUseCaseRequest, SendNotificationUseCaseResponse } from "@/domain/notification/application/use-cases/send-notification"
 import { makeQuestion } from "test/factories/make-question"
-import { InMemoryAnswerAttachmentsRepository } from "test/repositories/in-memory-answer-attachments-repository"
-import { InMemoryAnswersRepository } from "test/repositories/in-memory-answers-repository"
+import { makeQuestionComment } from "test/factories/make-question-comment"
 import { InMemoryNotificationsRepository } from "test/repositories/in-memory-notifications-repository"
 import { InMemoryQuestionAttachmentsRepository } from "test/repositories/in-memory-question-attachments-repository"
+import { InMemoryQuestionCommentsRepository } from "test/repositories/in-memory-question-comments-repository"
 import { InMemoryQuestionsRepository } from "test/repositories/in-memory-questions-repository"
 import { waitFor } from "test/utils/wait-for"
 import { SpyInstance } from "vitest"
-import { OnQuestionQuestionCommentCreated } from "./on-question-comment-created"
-import { makeQuestionComment } from "test/factories/make-question-comment"
-import { InMemoryQuestionCommentsRepository } from "test/repositories/in-memory-question-comments-repository"
+import { OnQuestionCommentCreated } from "./on-question-comment-created"
 
 let inMemoryQuestionAttachamentsRepository: InMemoryQuestionAttachmentsRepository
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository
@@ -32,7 +30,7 @@ describe('OnAnswerCreated', () => {
 
     sendNotificationExecuteSpy = vi.spyOn(sendNotificationUsecase, 'execute')
     
-    new OnQuestionQuestionCommentCreated(inMemoryQuestionsRepository, sendNotificationUsecase)
+    new OnQuestionCommentCreated(inMemoryQuestionsRepository, sendNotificationUsecase)
   })
   it('shoulde send a notification when an answer is created', async () => {
     const question = makeQuestion()

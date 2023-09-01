@@ -1,7 +1,7 @@
 import { UniqueEntityId } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
 import { Comment, CommentProps } from './comment'
-import { QuestionCommentCreatedEvent } from '../events/question-comment-crated-event'
+import { QuestionCommentCreatedEvent } from '../events/question-comment-created-event'
 
 export interface QuestionCommentProps extends CommentProps{
   questionId: UniqueEntityId
